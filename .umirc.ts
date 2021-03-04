@@ -9,7 +9,17 @@ export default defineConfig({
   },
   routes: [
     {path:'/login',component:'@/pages/login'},
-    { path: '/', component: '@/pages/index' },
+    {path:'/',component:'@/layout/index'},
   ],
+  dva:{
+    immer:true
+  },
+  proxy:{
+    '/api':{
+      target:'http://119.18.207.153:9997',
+      'changeOrigin': true,
+      'pathRewrite': { '^/api' : '' },
+    }
+  },
   fastRefresh: {},
 });
