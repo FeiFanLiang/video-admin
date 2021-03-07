@@ -16,7 +16,7 @@ export default function() {
                 <Link className="nav-link">事件管理</Link>
                 <Link className="nav-link">系统管理</Link>
             </nav>
-            <nav className="sub-nav">
+            {/* <nav className="sub-nav">
                 <Link className="sub-link">
                     实时监控
                 </Link>
@@ -32,7 +32,7 @@ export default function() {
                 <Link className="sub-link">
                     本地录像
                 </Link>
-            </nav>
+            </nav> */}
         </header>
     )
 }

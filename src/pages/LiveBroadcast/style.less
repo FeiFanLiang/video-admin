@@ -1,0 +1,123 @@
+.live-page-wrap {
+  display: flex;
+  height: calc(100vh - 70px);
+  .left {
+    display: flex;
+    flex: 0 0 260px;
+    flex-direction: column;
+    padding-top: 10px;
+    background: #fff;
+    .top-box {
+      flex: 2 0 0;
+    }
+    .console-box {
+      flex: 1 0 0;
+      .console-panel {
+        padding: 15px 20px;
+      }
+    }
+  }
+  .right {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 0px;
+    .normal-row {
+      display: flex;
+      width: 100%;
+      height: 45%;
+      .video-window {
+        flex: 1 1 0px;
+      }
+    }
+    .video-bottom-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+      padding: 0 20px;
+      width: 100%;
+      background: #141933;
+      .left-panel {
+        display: flex;
+        align-items: center;
+        .icon {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+      .icon + .icon {
+        margin-left: 20px;
+      }
+    }
+    .right-panel {
+        position: relative;
+        display: flex;
+        align-items: center;
+        .window-panel {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            box-sizing: border-box;
+            padding: 20px 30px;
+            width: 210px;
+            background: #192040;
+            border: 1px solid #2D3459;
+            .icon-panel-item+.icon-panel-item {
+                margin-left: 30px;
+            }
+            .icon-panel-item {
+                color: #fff;
+            }
+        }
+    }
+  }
+}
+.icon-close-b {
+  background: url('~@/images/icon-关闭.png');
+}
+.icon-audio-b {
+  background: url('~@/images/icon-监听.png');
+}
+.icon-rule-b {
+  background: url('~@/images/icon-显示规则.png');
+}
+.icon-track-b {
+  background: url('~@/images/icon-显示轨迹.png');
+}
+.icon-data-b {
+  background: url('~@/images/icon-显示信息.png');
+}
+.icon-user-group-b {
+  background: url('~@/images/icon-用户组.png');
+}
+.icon-picture-b {
+  background: url('~@/images/icon-抓图.png');
+}
+.icon-window-1 {
+    background: url('~@/images/icon1分屏.png');
+}
+.icon-window-4 {
+    background: url('~@/images/icon4分屏.png');
+}
+.icon-window-6 {
+    background: url('~@/images/icon6分屏.png');
+}
+.icon-window-8 {
+    background: url('~@/images/icon8分屏.png');
+}
+.icon-window-9 {
+    background: url('~@/images/icon9分屏.png');
+}
+.icon-window-16 {
+    background: url('~@/images/icon16分屏.png');
+}
+.icon-window-24 {
+    background: url('~@/images/icon24分屏.png');
+}
+.icon-window {
+    background: url('~@/images/icon分屏.png');
+}
+.icon-full-window {
+    background: url('~@/images/icon全屏.png');
+}
