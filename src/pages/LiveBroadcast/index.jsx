@@ -140,20 +140,20 @@ const LivePage = function () {
       </div>
       <div className="right">
         <div className="normal-row">
-        <div className="video-window">
-          <Video url="http://1011.hlsplay.aodianyun.com/demo/game.flv" />
-        </div>
-        <div className="video-window">
-          <Video url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin123456:0:33?live=1" />
-        </div>
+          <div className="video-window">
+            <Video />
+          </div>
+          <div className="video-window">
+            <Video url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1" />
+          </div>
         </div>
         <div className="normal-row">
-        <div className="video-window">
-          <Video url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin123456:0:33?live=1" />
-        </div>
-        <div className="video-window">
-          <Video />
-        </div>
+          <div className="video-window">
+            <Video />
+          </div>
+          <div className="video-window">
+            <Video />
+          </div>
         </div>
         <div className="video-bottom-panel">
           <div className="left-panel">
@@ -164,7 +164,6 @@ const LivePage = function () {
             <i className="icon icon-data-b"></i>
             <i className="icon icon-rule-b"></i>
             <i className="icon icon-track-b"></i>
-
           </div>
           <div className="right-panel">
             <i className="icon-window icon"></i>
@@ -172,45 +171,38 @@ const LivePage = function () {
             <div className="window-panel">
               <div className="icon-row">
                 <div className="icon-panel-item">
-                <i className="icon icon-window-1"></i>
-                <span>1分屏</span>
+                  <i className="icon icon-window-1"></i>
+                  <span>1分屏</span>
                 </div>
                 <div className="icon-panel-item">
-                <i className="icon icon-window-4"></i>
-                <span>4分屏</span>
+                  <i className="icon icon-window-4"></i>
+                  <span>4分屏</span>
                 </div>
 
                 <div className="icon-panel-item">
-                <i className="icon icon-window-6"></i>
-                <span>6分屏</span>
+                  <i className="icon icon-window-6"></i>
+                  <span>6分屏</span>
                 </div>
-          
-              
-              
-              
               </div>
               <div className="icon-row">
-              <div className="icon-panel-item">
-              <i className="icon icon-window-8"></i>
-              <span>8分屏</span>
-              </div>
-              <div className="icon-panel-item">
-              <i className="icon icon-window-9"></i>
-              <span>9分屏</span>
-              </div>
-              <div className="icon-panel-item">
-              <i className="icon icon-window-16"></i>
-              <span>16分屏</span>
-              </div>
-              
-              
+                <div className="icon-panel-item">
+                  <i className="icon icon-window-8"></i>
+                  <span>8分屏</span>
+                </div>
+                <div className="icon-panel-item">
+                  <i className="icon icon-window-9"></i>
+                  <span>9分屏</span>
+                </div>
+                <div className="icon-panel-item">
+                  <i className="icon icon-window-16"></i>
+                  <span>16分屏</span>
+                </div>
               </div>
               <div className="icon-row">
-              <div className="icon-panel-item">
-              <i className="icon icon-window-24"></i>
-              <span>24分屏</span>
-              </div>
-              
+                <div className="icon-panel-item">
+                  <i className="icon icon-window-24"></i>
+                  <span>24分屏</span>
+                </div>
               </div>
             </div>
           </div>
