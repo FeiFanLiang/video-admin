@@ -202,7 +202,9 @@ const LivePage = function () {
       <div className="right">
         <div className="window-wrap">
           <div className="normal-row">
-            <div className="video-window">{/* <Video /> */}</div>
+            <div className="video-window">
+              <Video />
+            </div>
             <div className="video-window">
               <Video
                 active={active === 1 ? true : false}
@@ -212,8 +214,12 @@ const LivePage = function () {
             </div>
           </div>
           <div className="normal-row">
-            <div className="video-window">{/* <Video /> */}</div>
-            <div className="video-window">{/* <Video /> */}</div>
+            <div className="video-window">
+              <Video />
+            </div>
+            <div className="video-window">
+              <Video />
+            </div>
           </div>
         </div>
 
