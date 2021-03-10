@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.less';
 import { Collapse, Tree, Slider, Input } from 'antd';
 import Video from '@/component/Video';
-import { directionCtrlApi } from '@/server/cmd';
+import { directionCtrlApi, powerSwitchApi } from '@/server/cmd';
 const { Panel } = Collapse;
 
 const PanelHeader = ({ title }) => {
@@ -61,6 +61,31 @@ const TreeRender = (props) => {
 };
 
 const LivePage = function () {
+  const [lightOpen, setLight] = useState(false);
+  const handleLightCtrl = () => {
+    setLight(!lightOpen);
+    powerSwitchApi(1, !lightOpen);
+  };
+
+  const [wiperOpen, setWiper] = useState(false);
+  const handleWiperCtrl = () => {
+    setWiper(!wiperOpen);
+    powerSwitchApi(2, !wiperOpen);
+  };
+
+  const [ctrlSpeed, setCtrlSpeed] = useState(1);
+
+  const handleDiretion = (type) => {
+    directionCtrlApi(type, ctrlSpeed);
+  };
+
+  const [active, setActive] = useState(null);
+  const handlePickWindow = (number) => {
+    setActive(number);
+  };
+
+  const [collShow, setCollShow] = useState(false);
+
   return (
     <div className="live-page-wrap">
       <div className="left">
@@ -85,71 +110,113 @@ const LivePage = function () {
           </div>
         </div>
         <div className="console-box">
-          <div className="title">云台控制</div>
+          <div className="title">
+            <i className="icon icon-cloud-ctrl"></i>
+            云台控制
+          </div>
           <div className="console-panel">
             <div className="panel-button">
               <div className="button-col">
-                <button onClick={() => directionCtrlApi(17)}>↖</button>
-                <button onClick={() => directionCtrlApi(13)}>↑</button>
-                <button onClick={() => directionCtrlApi(18)}>↗</button>
-                <button>－</button>
-                <button className="last">*</button>
-                <button className="last">＋</button>
+                <button
+                  className="icon icon-ctrl-left-up"
+                  onClick={() => handleDiretion(17)}
+                ></button>
+                <button
+                  className="icon icon-ctrl-up"
+                  onClick={() => handleDiretion(13)}
+                ></button>
+                <button
+                  className="icon icon-ctrl-right-up"
+                  onClick={() => handleDiretion(18)}
+                ></button>
+                <button className="icon icon-ctrl-less"></button>
+                <button className="last icon"></button>
+                <button className="last icon icon-ctrl-add"></button>
               </div>
               <div className="button-col">
-                <button onClick={() => directionCtrlApi(15)}>←</button>
+                <button
+                  className="icon icon-ctrl-left"
+                  onClick={() => handleDiretion(15)}
+                ></button>
                 <span className="placeholder"></span>
-                <button onClick={() => directionCtrlApi(16)}>→</button>
-                <button>－</button>
-                <button className="last">*</button>
-                <button className="last">＋</button>
+                <button
+                  className="icon icon-ctrl-right"
+                  onClick={() => handleDiretion(16)}
+                ></button>
+                <button className="icon icon-ctrl-less"></button>
+                <button className="icon icon-ctrl-focus last"></button>
+                <button className="last icon icon-ctrl-add"></button>
               </div>
               <div className="button-col">
-                <button onClick={() => directionCtrlApi(19)}>↙</button>
-                <button onClick={() => directionCtrlApi(14)}>↓</button>
-                <button onClick={() => directionCtrlApi(20)}>↘</button>
-                <button>－</button>
-                <button className="last">*</button>
-                <button className="last">＋</button>
+                <button
+                  className="icon icon-ctrl-down-left"
+                  onClick={() => handleDiretion(19)}
+                ></button>
+                <button
+                  className="icon icon-ctrl-down"
+                  onClick={() => handleDiretion(14)}
+                ></button>
+                <button
+                  className="icon icon-ctrl-down-right"
+                  onClick={() => handleDiretion(20)}
+                ></button>
+                <button className="icon icon-ctrl-less"></button>
+                <button className="icon icon-ctrl-focus last"></button>
+                <button className="last icon icon-ctrl-add"></button>
               </div>
             </div>
             <div className="panel-slider">
               <span>速度</span>
               <div className="slider-wrap">
                 <Slider
+                  value={ctrlSpeed}
                   marks={marks}
                   step={1}
                   min={1}
                   max={7}
                   tooltipVisible={false}
+                  onChange={(speed) => setCtrlSpeed(speed)}
                 />
               </div>
             </div>
             <div className="panel-control">
-              <button>灯光</button>
-              <button>雨刷</button>
-              <button>3D定位</button>
+              <button
+                className="icon icon-ctrl-light"
+                onClick={handleLightCtrl}
+              ></button>
+              <button
+                className="icon icon-ctrl-wiper"
+                onClick={handleWiperCtrl}
+              ></button>
+              <button className="icon icon-ctrl-position"></button>
             </div>
             <div className="panel-setting">
-              <span>预置位: </span>
+              <span>预置位:</span>
               <Input></Input>
-              <button>设置</button>
-              <button>√</button>
+              <button className="icon icon-ctrl-setting"></button>
+              <button className="icon icon-ctrl-use"></button>
             </div>
           </div>
         </div>
       </div>
       <div className="right">
-        <div className="normal-row">
-          <div className="video-window">{/* <Video /> */}</div>
-          <div className="video-window">
-            {/* <Video url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1" /> */}
+        <div className="window-wrap">
+          <div className="normal-row">
+            <div className="video-window">{/* <Video /> */}</div>
+            <div className="video-window">
+              <Video
+                active={active === 1 ? true : false}
+                onClick={() => handlePickWindow(1)}
+                url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1"
+              />
+            </div>
+          </div>
+          <div className="normal-row">
+            <div className="video-window">{/* <Video /> */}</div>
+            <div className="video-window">{/* <Video /> */}</div>
           </div>
         </div>
-        <div className="normal-row">
-          <div className="video-window">{/* <Video /> */}</div>
-          <div className="video-window">{/* <Video /> */}</div>
-        </div>
+
         <div className="video-bottom-panel">
           <div className="left-panel">
             <i className="icon icon-close"></i>
@@ -161,9 +228,15 @@ const LivePage = function () {
             <i className="icon icon-track"></i>
           </div>
           <div className="right-panel">
-            <i className="icon-window icon"></i>
+            <i
+              className="icon-window icon"
+              onClick={() => setCollShow(!collShow)}
+            ></i>
             <i className="icon-full-window icon"></i>
-            <div className="window-panel">
+            <div
+              className="window-panel"
+              style={{ display: collShow ? 'block' : 'none' }}
+            >
               <div className="icon-row">
                 <div className="icon-panel-item">
                   <i className="icon icon-window-1"></i>

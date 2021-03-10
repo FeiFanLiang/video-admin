@@ -12,19 +12,90 @@
     }
     .console-box {
       flex: 1 0 0;
+      font-size: 14px;
+      .title {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        padding: 0 20px;
+        color: #222222;
+        font-weight: 400;
+        background: #f0f2f5;
+        i {
+          margin-right: 13px;
+        }
+      }
       .console-panel {
         padding: 15px 20px;
+        .button-col + .button-col {
+          margin-top: 20px;
+        }
         button {
           display: inline-block;
           width: 25px;
           height: 25px;
-          border: 1px solid #cacbcc;
           border-radius: 4px;
           & + button {
             margin-left: 20px;
           }
           & + button.last {
-            margin-left: 7px;
+            margin-left: 5px;
+          }
+        }
+        .icon-ctrl-light {
+          width: 60px;
+          height: 25px;
+        }
+        .icon-ctrl-wiper {
+          margin-left: 10px;
+          width: 60px;
+          height: 25px;
+        }
+        .icon-ctrl-position {
+          margin-left: 10px;
+          width: 80px;
+          height: 25px;
+        }
+        .placeholder {
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          margin: 0 20px;
+        }
+      }
+      .panel-slider {
+        display: flex;
+        margin-bottom: 20px;
+        & > span {
+          padding-top: 10px;
+          font-size: 14px;
+          color: #333333;
+        }
+        .slider-wrap {
+          margin-left: 10px;
+          width: 180px;
+        }
+      }
+      .panel-control {
+        margin-bottom: 20px;
+      }
+      .panel-setting {
+        display: flex;
+        align-items: center;
+        & > span {
+          margin-right: 10px;
+          font-size: 14px;
+          color: #333333;
+        }
+        .ant-input {
+          width: 80px;
+        }
+        button {
+          width: 30px;
+          height: 30px;
+          margin-left: 10px;
+          & + button {
+            margin-left: 10px;
           }
         }
       }
@@ -32,14 +103,22 @@
   }
   .right {
     display: flex;
-    flex-wrap: wrap;
     flex: 1 1 0px;
+    flex-direction: column;
+    .window-wrap {
+      display: flex;
+      flex: 1 0 0;
+      flex-direction: column;
+    }
     .normal-row {
       display: flex;
-      width: 100%;
-      height: 45%;
+      flex: 1 0;
+      height: 0px;
       .video-window {
         flex: 1 1 0px;
+      }
+      & + .normal-row {
+        margin-top: 2px;
       }
     }
     .video-bottom-panel {
@@ -67,10 +146,15 @@
       position: relative;
       display: flex;
       align-items: center;
+      .icon {
+        width: 20px;
+        height: 20px;
+      }
       .window-panel {
+        display: none;
         position: absolute;
         bottom: 30px;
-        right: 0;
+        right: 35px;
         box-sizing: border-box;
         padding: 20px 30px;
         width: 220px;
@@ -112,10 +196,10 @@
   background: url('~@/images/视频_关闭.png');
   background-position: 0 0px;
   &:hover {
-    background-position: 16px 0;
+    background-position: -17px 0;
   }
   &.active {
-    background-position: 32px 0;
+    background-position: -32px 0;
   }
 }
 
@@ -123,10 +207,43 @@
   background: url('~@/images/视频_声音.png');
   background-position: 0 0;
   &:hover {
-    background-position: 16px 0;
+    background-position: -17px 0;
   }
   &.active {
-    background-position: 32px 0;
+    background-position: -32px 0;
+  }
+}
+
+.icon-video-video {
+  background: url('~@/images/视频_录像.png');
+  background-position: 0 0;
+  &:hover {
+    background-position: -17px 0;
+  }
+  &.active {
+    background-position: -32px 0;
+  }
+}
+
+.icon-video-stream {
+  background: url('~@/images/视频_码流切换.png');
+  background-position: 0 0;
+  &:hover {
+    background-position: -17px 0;
+  }
+  &.active {
+    background-position: -32px 0;
+  }
+}
+
+.icon-video-stream {
+  background: url('~@/images/视频_码流切换.png');
+  background-position: 0 0;
+  &:hover {
+    background-position: -17px 0;
+  }
+  &.active {
+    background-position: -32px 0;
   }
 }
 
@@ -134,10 +251,10 @@
   background: url('~@/images/视频_显示规则.png');
   background-position: 0 0;
   &:hover {
-    background-position: 16px 0;
+    background-position: -17px 0;
   }
   &.active {
-    background-position: 32px 0;
+    background-position: -32px 0;
   }
 }
 
@@ -145,10 +262,10 @@
   background: url('~@/images/视频_显示轨迹追踪.png');
   background-position: 0 0;
   &:hover {
-    background-position: 16px 0;
+    background-position: -17px 0;
   }
   &.active {
-    background-position: 32px 0;
+    background-position: -32px 0;
   }
 }
 
@@ -156,10 +273,10 @@
   background: url('~@/images/视频_显示数据.png');
   background-position: 0 0;
   &:hover {
-    background-position: 16px 0;
+    background-position: -17px 0;
   }
   &.active {
-    background-position: 32px 0;
+    background-position: -32px 0;
   }
 }
 
@@ -243,77 +360,77 @@
   background: url('~@/images/分屏_1分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 30px 0;
+    background-position: -31px 0;
   }
   &.active {
-    background-position: 60px 0;
+    background-position: -62px 0;
   }
 }
 .icon-window-4 {
   background: url('~@/images/分屏_4分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 30px 0;
+    background-position: -31px 0;
   }
   &.active {
-    background-position: 60px 0;
+    background-position: -62px 0;
   }
 }
 .icon-window-6 {
   background: url('~@/images/分屏_6分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 30px 0;
+    background-position: -31px 0;
   }
   &.active {
-    background-position: 60px 0;
+    background-position: -62px 0;
   }
 }
 .icon-window-8 {
   background: url('~@/images/分屏_8分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 30px 0;
+    background-position: -31px 0;
   }
   &.active {
-    background-position: 60px 0;
+    background-position: -62px 0;
   }
 }
 .icon-window-9 {
   background: url('~@/images/分屏_9分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 30px 0;
+    background-position: -31px 0;
   }
   &.active {
-    background-position: 60px 0;
+    background-position: -62px 0;
   }
 }
 .icon-window-16 {
   background: url('~@/images/分屏_16分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 30px 0;
+    background-position: -31px 0;
   }
   &.active {
-    background-position: 60px 0;
+    background-position: -62px 0;
   }
 }
 .icon-window-24 {
   background: url('~@/images/分屏_24分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 30px 0;
+    background-position: -31px 0;
   }
   &.active {
-    background-position: 60px 0;
+    background-position: -62px 0;
   }
 }
 .icon-window {
   background: url('~@/images/全局_分屏.png');
   background-position: 0 0;
   &:hover {
-    background-position: 17px 0;
+    background-position: -21px 0;
   }
   &.active {
     background-position: 34px 0;
@@ -323,7 +440,7 @@
   background: url('~@/images/全局_全屏复原.png');
   background-position: 0 0;
   &:hover {
-    background-position: 17px 0;
+    background-position: -21px 0;
   }
   &.active {
     background-position: 34px 0;
@@ -334,7 +451,7 @@
   background: url('~@/images/云台控制_左上.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -342,7 +459,7 @@
   background: url('~@/images/云台控制_上.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -350,7 +467,7 @@
   background: url('~@/images/云台控制_右上.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -358,7 +475,7 @@
   background: url('~@/images/云台控制_左.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -366,7 +483,7 @@
   background: url('~@/images/云台控制_右.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -374,7 +491,7 @@
   background: url('~@/images/云台控制_左下.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -382,7 +499,7 @@
   background: url('~@/images/云台控制_下.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -390,7 +507,7 @@
   background: url('~@/images/云台控制_右下.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -398,7 +515,7 @@
   background: url('~@/images/云台控制_add.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 
@@ -406,21 +523,21 @@
   background: url('~@/images/云台控制_less.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -26px 0;
   }
 }
 .icon-ctrl-position {
   background: url('~@/images/云台控制_3D定位.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -81px 0;
   }
 }
 .icon-ctrl-light {
   background: url('~@/images/云台控制_灯光.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -61px 0;
   }
 }
 
@@ -428,7 +545,7 @@
   background: url('~@/images/云台控制_调用.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -30px 0;
   }
 }
 
@@ -436,7 +553,7 @@
   background: url('~@/images/云台控制_雨刷.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -61px 0;
   }
 }
 
@@ -444,6 +561,20 @@
   background: url('~@/images/云台控制_设置.png');
   background-position: 0 0;
   &:hover {
-    background-position: -27px 0;
+    background-position: -30px 0;
   }
+}
+
+.icon-ctrl-focus {
+  background: url('~@/images/云台控制_设置.png');
+  background-position: 0 0;
+  &:hover {
+    background-position: -26px 0;
+  }
+}
+
+.icon-cloud-ctrl {
+  width: 16px;
+  height: 16px;
+  background: url('~@/images/icon云台控制.png');
 }

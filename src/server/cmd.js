@@ -8,23 +8,24 @@
 
 //import request from 'axios';
 import request from 'umi-request';
-export const lightPowerSwitchApi = (open) => {
+
+export const powerSwitchApi = (type, open) => {
   return request('/test123/192.168.0.205:8000:admin:admin12345:0:33', {
     params: {
-      param1: open ? 1 : 0,
+      param1: open ? 0 : 1,
       cmd: 'ptzctrl',
-      ctrltype: 13,
+      ctrltype: type,
     },
   });
 };
 
-export const directionCtrlApi = (type) => {
+export const directionCtrlApi = (type, speed) => {
   return request('/test123/192.168.0.205:8000:admin:admin12345:0:33', {
     params: {
       cmd: 'ptzctrl',
       ctrltype: type,
       param1: 0,
-      param2: 5,
+      param2: speed,
     },
     method: 'get',
   }).then(() => {
@@ -33,7 +34,7 @@ export const directionCtrlApi = (type) => {
         cmd: 'ptzctrl',
         ctrltype: type,
         param1: 1,
-        param2: 5,
+        param2: speed,
       },
     });
   });

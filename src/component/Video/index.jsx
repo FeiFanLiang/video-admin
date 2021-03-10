@@ -3,7 +3,7 @@ import './style.less';
 import flvjs from 'flv.js';
 import Controls from './component/Controls';
 
-const Video = ({ url }) => {
+const Video = ({ active, url, onClick }) => {
   const videoRef = useRef(null);
   const flvPlayerRef = useRef(null);
   const [speeds, setSpeeds] = useState(0);
@@ -54,7 +54,7 @@ const Video = ({ url }) => {
   }, [url]);
 
   return (
-    <div className="video-box">
+    <div className={`video-box ${active ? 'active' : ''}`} onClick={onClick}>
       {url ? (
         <video
           className="video"
