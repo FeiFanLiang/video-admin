@@ -1,23 +1,20 @@
 import React from 'react';
 
-
-const Controls = ({speeds}) => {
-    return (
-        <div className="video-control">
-                <div className="control-panel">
-                    <i className="icon icon-close"></i>
-                    <i className="icon icon-audio"></i>
-                    <i className="icon icon-video"></i>
-                    <i className="icon icon-stream"></i>
-                    <i className="icon icon-rule"></i>
-                    <i className="icon icon-track"></i>
-                    <i className="icon icon-data"></i>
-                </div>
-                <div className="video-title">
-                    A1楼南走廊: {speeds}kbps
-                </div>
-            </div>
-    )
-}
+const Controls = ({ speeds }) => {
+  return (
+    <div className="video-control">
+      <div className="control-panel">
+        <button className="icon icon-close ctrl-btn"></button>
+        <button className="icon icon-audio ctrl-btn"></button>
+        <button className="icon icon-video ctrl-btn"></button>
+        <button className="icon icon-stream ctrl-btn"></button>
+        <button className="icon icon-rule ctrl-btn"></button>
+        <button className="icon icon-track ctrl-btn"></button>
+        <button className="icon icon-data ctrl-btn"></button>
+      </div>
+      <div className="video-title">A1楼南走廊: {speeds}kbps</div>
+    </div>
+  );
+};
 
 export default Controls;

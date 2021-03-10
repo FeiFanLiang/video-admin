@@ -1,61 +1,48 @@
 .video-box {
-    position: relative;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  video {
     width: 100%;
     height: 100%;
-    video {
-        width: 100%;
-        height: 100%;
-        object-fit: fill
+    object-fit: fill;
+  }
+  .no-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #fff;
+  }
+  .video-control {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding: 0 20px;
+    background: rgba(8, 14, 26, 0.6);
+    font-size: 14px;
+    color: #f1f1f1;
+  }
+  .control-panel {
+    i + i {
+      margin-left: 15px;
     }
-    .no-video {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        color: #fff;
+    i {
+      cursor: pointer;
     }
-    .video-control {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 40px;
-        padding: 0 20px;
-        background: rgba(8, 14, 26, 0.6);
-        font-size: 14px;
-        color: #F1F1F1;
-    }
-    .control-panel {
-        i + i {
-            margin-left: 15px;
-        }
-        i {
-            cursor: pointer;
-        }
-    }
+  }
 }
 
-.icon-close {
-    background: url('~@/images/icon关闭.png') no-repeat;
-}
-.icon-video {
-    background: url('~@/images/icon录像.png') no-repeat;
-}
-.icon-stream {
-    background: url('~@/images/icon码流.png') no-repeat;
-}
-.icon-audio {
-    background: url('~@/images/icon声音.png') no-repeat;
-}
-.icon-rule {
-    background: url('~@/images/icon显示规则.png') no-repeat;
-}
-.icon-track {
-    background: url('~@/images/icon显示轨迹.png') no-repeat;
-}
-.icon-data {
-    background: url('~@/images/icon显示数据.png') no-repeat;
+.icon-btn {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  border: 1px solid #cacbcc;
+  border-radius: 4px;
 }

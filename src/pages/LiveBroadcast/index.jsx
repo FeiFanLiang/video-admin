@@ -2,6 +2,7 @@ import React from 'react';
 import './style.less';
 import { Collapse, Tree, Slider, Input } from 'antd';
 import Video from '@/component/Video';
+import { directionCtrlApi } from '@/server/cmd';
 const { Panel } = Collapse;
 
 const PanelHeader = ({ title }) => {
@@ -88,28 +89,28 @@ const LivePage = function () {
           <div className="console-panel">
             <div className="panel-button">
               <div className="button-col">
-                <button>↖</button>
-                <button>↑</button>
-                <button>↗</button>
+                <button onClick={() => directionCtrlApi(17)}>↖</button>
+                <button onClick={() => directionCtrlApi(13)}>↑</button>
+                <button onClick={() => directionCtrlApi(18)}>↗</button>
                 <button>－</button>
-                <button>光圈</button>
-                <button>＋</button>
+                <button className="last">*</button>
+                <button className="last">＋</button>
               </div>
               <div className="button-col">
-                <button>←</button>
+                <button onClick={() => directionCtrlApi(15)}>←</button>
                 <span className="placeholder"></span>
-                <button>→</button>
+                <button onClick={() => directionCtrlApi(16)}>→</button>
                 <button>－</button>
-                <button>聚焦</button>
-                <button>＋</button>
+                <button className="last">*</button>
+                <button className="last">＋</button>
               </div>
               <div className="button-col">
-                <button>↙</button>
-                <button>↓</button>
-                <button>↘</button>
+                <button onClick={() => directionCtrlApi(19)}>↙</button>
+                <button onClick={() => directionCtrlApi(14)}>↓</button>
+                <button onClick={() => directionCtrlApi(20)}>↘</button>
                 <button>－</button>
-                <button>放大</button>
-                <button>＋</button>
+                <button className="last">*</button>
+                <button className="last">＋</button>
               </div>
             </div>
             <div className="panel-slider">
@@ -140,30 +141,24 @@ const LivePage = function () {
       </div>
       <div className="right">
         <div className="normal-row">
+          <div className="video-window">{/* <Video /> */}</div>
           <div className="video-window">
-            <Video />
-          </div>
-          <div className="video-window">
-            <Video url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1" />
+            {/* <Video url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1" /> */}
           </div>
         </div>
         <div className="normal-row">
-          <div className="video-window">
-            <Video />
-          </div>
-          <div className="video-window">
-            <Video />
-          </div>
+          <div className="video-window">{/* <Video /> */}</div>
+          <div className="video-window">{/* <Video /> */}</div>
         </div>
         <div className="video-bottom-panel">
           <div className="left-panel">
-            <i className="icon icon-close-b"></i>
-            <i className="icon icon-picture-b"></i>
-            <i className="icon icon-user-group-b"></i>
-            <i className="icon icon-audio-b"></i>
-            <i className="icon icon-data-b"></i>
-            <i className="icon icon-rule-b"></i>
-            <i className="icon icon-track-b"></i>
+            <i className="icon icon-close"></i>
+            <i className="icon icon-picture"></i>
+            <i className="icon icon-user-group"></i>
+            <i className="icon icon-audio"></i>
+            <i className="icon icon-data"></i>
+            <i className="icon icon-rule"></i>
+            <i className="icon icon-track"></i>
           </div>
           <div className="right-panel">
             <i className="icon-window icon"></i>
