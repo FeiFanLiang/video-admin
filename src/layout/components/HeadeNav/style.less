@@ -1,56 +1,69 @@
 .header-nav {
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  padding: 0 30px 0 20px;
+  .nav-logo {
+    display: flex;
+    margin-right: 130px;
+    align-items: center;
+    .logo-img {
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+      background: url('~@/images/logo.png') no-repeat;
+    }
+    span {
+      font-size: 20px;
+      font-weight: bold;
+      color: #f5f7fa;
+    }
+  }
+  nav {
+    .nav-link {
+      position: relative;
+      padding: 27px 9px 24px 9px;
+      font-size: 16px;
+      line-height: 1;
+      color: #a3aacc;
+      & + .nav-link {
+        margin-left: 20px;
+      }
+      &.active {
+        color: #00aaff;
+        border-bottom: 2px solid #0099e6;
+      }
+      &:hover {
+        .sub-nav-wrap {
+          display: block;
+        }
+      }
+    }
+  }
+  .sub-nav-wrap {
+    position: absolute;
+    height: 40px;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: #141933;
+    z-index: 1;
+  }
+  .sub-nav {
     display: flex;
     align-items: center;
-    height: 70px;
-    padding: 0 30px 0 20px;
-    .nav-logo {
-        display: flex;
-        margin-right: 130px;
-        align-items: center;
-        .logo-img {
-            margin-right: 10px;
-            width: 30px;
-            height: 30px;
-            background: url('~@/images/logo.png') no-repeat;
-        }
-        span {
-            font-size: 20px;
-            font-weight: bold;
-            color: #F5F7FA;
-        }
+    padding-left: 260px;
+    height: 100%;
+    .sub-link {
+      font-size: 12px;
+      color: #a3aacc;
+      &.active {
+        color: #00bfff;
+      }
+      & + .sub-link {
+        margin-left: 30px;
+      }
     }
-    nav {
-        position: relative;
-        .nav-link {
-            padding:27px 9px;
-            font-size: 16px;
-            line-height: 1;
-            color: #A3AACC;
-            &+.nav-link {
-                margin-left: 20px;
-            }
-            &.active {
-                color: #00AAFF;
-                border-bottom: 2px solid #0099E6;
-            }
-        }
-    }
-    .sub-nav {
-        position: absolute;
-        height: 40px;
-        top: 70px;
-        left: 0;
-        right: 0;
-        display: flex;
-        align-items: center;
-        padding-left: 260px;
-        background-color: #141933;
-        .sub-link {
-            color: #A3AACC;
-            &+.sub-link {
-                margin-left: 30px;
-            }
-        }
-    }
+  }
 }

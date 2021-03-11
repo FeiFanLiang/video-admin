@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import './style.less';
 import { Collapse, Tree, Slider, Input } from 'antd';
+import {
+  SearchOutlined,
+  CaretUpOutlined,
+  CaretDownOutlined,
+  PlusSquareOutlined,
+} from '@ant-design/icons';
 import Video from '@/component/Video';
 import { directionCtrlApi, powerSwitchApi } from '@/server/cmd';
 const { Panel } = Collapse;
-
+const { DirectoryTree } = Tree;
 const PanelHeader = ({ title }) => {
   return (
     <div className="panel-header">
@@ -18,27 +24,33 @@ const treeData = [
   {
     title: '北京',
     key: '0-0',
+    icon: <i className="icon icon-tree-map" />,
     children: [
       {
         title: '1.99',
         key: '0-0-0',
+        icon: <i className="icon icon-camera-gun" />,
       },
       {
         title: '朝阳',
         key: '0-0-1',
+        icon: <i className="icon icon-tree-map" />,
         children: [
           {
             title: '1.88',
             key: '0-0-0-0',
+            icon: <i className="icon icon-camera-gun" />,
           },
         ],
       },
       {
         title: '海淀',
+        icon: <i className="icon icon-tree-map" />,
         children: [
           {
             title: '1.22',
             key: '0-0-0-1',
+            icon: <i className="icon icon-camera-gun" />,
           },
         ],
       },
@@ -90,22 +102,57 @@ const LivePage = function () {
     <div className="live-page-wrap">
       <div className="left">
         <div className="top-box">
-          <div className="search-box"></div>
+          <div className="search-box">
+            <Input suffix={<SearchOutlined />} />
+          </div>
           <div className="tree-list-box">
-            <Collapse defaultActiveKey={['1']} ghost>
-              <Panel header={<PanelHeader title="设备列表" />} key="1">
+            <Collapse
+              defaultActiveKey={['1']}
+              ghost
+              expandIconPosition="right"
+              expandIcon={({ isActive }) =>
+                isActive ? (
+                  <CaretUpOutlined style={{ color: '#00AAFF' }} />
+                ) : (
+                  <CaretDownOutlined />
+                )
+              }
+            >
+              <Panel
+                header={
+                  <div className="panel-header">
+                    <i className="icon icon-equipment-group"></i>
+                    <span>设备列表</span>
+                  </div>
+                }
+                key="1"
+              >
                 <div className="tree-box">
-                  <Tree
-                    showIcon
+                  <DirectoryTree
                     defaultExpandAll
                     defaultSelectedKeys={['0-0-0']}
                     treeData={treeData}
-                    titleRender={TreeRender}
                   />
                 </div>
               </Panel>
-              <Panel header={<PanelHeader title="系统分组" />} key="2"></Panel>
-              <Panel header={<PanelHeader title="轮询分组" />} key="3"></Panel>
+              <Panel
+                header={
+                  <div className="panel-header">
+                    <i className="icon icon-admin-group"></i>
+                    <span>系统分组</span>
+                  </div>
+                }
+                key="2"
+              ></Panel>
+              <Panel
+                header={
+                  <div className="panel-header">
+                    <i className="icon icon-round-group"></i>
+                    <span>轮巡分组</span>
+                  </div>
+                }
+                key="3"
+              ></Panel>
             </Collapse>
           </div>
         </div>
@@ -130,7 +177,7 @@ const LivePage = function () {
                   onClick={() => handleChangeDirection(18)}
                 ></button>
                 <button className="icon icon-ctrl-less"></button>
-                <button className="last icon"></button>
+                <button className="last icon icon-gq"></button>
                 <button className="last icon icon-ctrl-add"></button>
               </div>
               <div className="button-col">
@@ -144,7 +191,7 @@ const LivePage = function () {
                   onClick={() => handleChangeDirection(16)}
                 ></button>
                 <button className="icon icon-ctrl-less"></button>
-                <button className="icon icon-ctrl-focus last"></button>
+                <button className="icon icon-focus last"></button>
                 <button className="last icon icon-ctrl-add"></button>
               </div>
               <div className="button-col">
@@ -161,7 +208,7 @@ const LivePage = function () {
                   onClick={() => handleChangeDirection(20)}
                 ></button>
                 <button className="icon icon-ctrl-less"></button>
-                <button className="icon icon-ctrl-focus last"></button>
+                <button className="icon icon-yj last"></button>
                 <button className="last icon icon-ctrl-add"></button>
               </div>
             </div>

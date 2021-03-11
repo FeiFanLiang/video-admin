@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'umi';
+import { useRouteMatch } from 'react-router-dom';
 import './style.less';
 
 const routes = [
@@ -41,37 +42,51 @@ const routes = [
   },
 ];
 
-export default function () {
+export default function (props) {
+  const [subRoutes, setSubRoutes] = useState([]);
+  const [subLinkShow, setLinkShow] = useState(false);
+
+  const handleMoveRoute = (route) => {
+    setLinkShow(true);
+    setSubRoutes(route.children);
+  };
+
   return (
-    <header className="header-nav">
+    <header className="header-nav" onMouseLeave={() => setLinkShow(false)}>
       <div className="nav-logo">
         <i className="logo-img"></i>
         <span>安防综合管理平台</span>
       </div>
       <nav>
         {routes.map((route) => (
-          <NavLink key={route.path} className="nav-link" to={route.path}>
+          <NavLink
+            key={route.path}
+            onMouseEnter={() => {
+              handleMoveRoute(route);
+            }}
+            className="nav-link"
+            activeClassName="active"
+            to={route.path}
+          >
             {route.title}
           </NavLink>
         ))}
       </nav>
-      <nav className="sub-nav">
-        <Link className="sub-link" to="/video/live">
-          实时监控
-        </Link>
-        <Link className="sub-link" to="/video/replay">
-          视频回放
-        </Link>
-        <Link className="sub-link" to="/video/download">
-          下载任务
-        </Link>
-        <Link className="sub-link" to="/video/pics">
-          图片浏览
-        </Link>
-        <Link className="sub-link" to="/video/localVideo">
-          本地录像
-        </Link>
-      </nav>
+      {subLinkShow ? (
+        <div className="sub-nav-wrap">
+          <nav className="sub-nav">
+            {subRoutes.map((subRoute) => (
+              <NavLink
+                key={subRoute.path}
+                className="sub-link"
+                to={subRoute.path}
+              >
+                {subRoute.title}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+      ) : null}
     </header>
   );
 }

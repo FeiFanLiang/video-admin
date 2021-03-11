@@ -11,8 +11,14 @@ export default defineConfig({
     { path: '/login', component: '@/pages/login' },
     {
       path: '/',
+      exact: false,
       component: '@/layout/index',
+      wrappers: ['@/layout/components/Wrap'],
       routes: [
+        {
+          path: '/',
+          redirect: '/video/live',
+        },
         {
           path: '/video/live',
           component: '@/pages/LiveBroadcast/index',

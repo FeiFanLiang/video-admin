@@ -5,10 +5,35 @@
     display: flex;
     flex: 0 0 260px;
     flex-direction: column;
-    padding-top: 10px;
     background: #fff;
+    .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+      background: #f0f2f5;
+      padding-left: 20px;
+    }
+    .ant-tree.ant-tree-directory .ant-tree-treenode-selected:hover::before,
+    .ant-tree.ant-tree-directory .ant-tree-treenode-selected::before {
+      background: #e5f2ff;
+    }
+    .ant-tree.ant-tree-directory
+      .ant-tree-treenode
+      .ant-tree-node-content-wrapper.ant-tree-node-selected {
+      color: #333333;
+    }
     .top-box {
       flex: 2 0 0;
+      overflow: auto;
+      .search-box {
+        padding: 10px;
+      }
+    }
+    .panel-header {
+      i {
+        margin-right: 15px;
+        vertical-align: middle;
+      }
+      span {
+        vertical-align: middle;
+      }
     }
     .console-box {
       flex: 1 0 0;
@@ -126,13 +151,15 @@
       padding: 0 20px;
       width: 100%;
       background: #141933;
+      .icon {
+        cursor: pointer;
+      }
       .left-panel {
         display: flex;
         align-items: center;
         .icon {
           width: 20px;
           height: 20px;
-          cursor: pointer;
         }
       }
       .icon + .icon {
@@ -353,6 +380,19 @@
   }
 }
 
+.icon-gq {
+  background: url('~@/images/icon光圈.png');
+  background-position: 2px 3px;
+}
+.icon-focus {
+  background: url('~@/images/icon聚焦.png');
+  background-position: 2px 3px;
+}
+.icon-yj {
+  background: url('~@/images/icon远近.png');
+  background-position: 2px 3px;
+}
+
 .icon-window-1 {
   background: url('~@/images/分屏_1分屏.png');
   background-position: 0 0;
@@ -423,6 +463,31 @@
     background-position: -62px 0;
   }
 }
+
+.icon-equipment-group {
+  background: url('~@/images/icon设备列表.png');
+}
+.icon-admin-group {
+  background: url('~@/images/icon系统分组.png');
+}
+.icon-round-group {
+  background: url('~@/images/icon轮巡分组.png');
+}
+
+i.icon-tree-map {
+  margin-right: 8px;
+  height: 20px;
+  width: 20px;
+  background: url('~@/images/tree-map.png');
+  background-color: #ff00ff;
+}
+i.icon-camera-gun {
+  margin-right: 8px;
+  height: 20px;
+  width: 20px;
+  background: url('~@/images/camera_gun.png');
+}
+
 .icon-window {
   background: url('~@/images/全局_分屏.png');
   background-position: 0 0;

@@ -48,10 +48,6 @@ const Video = ({ active, url, onClick }) => {
       flvPlayer.load();
       flvPlayer.play();
     }
-    return () => {
-      flvPlayerRef.current.unload();
-      flvPlayerRef.current.destroy();
-    };
   }, [url]);
 
   return (
