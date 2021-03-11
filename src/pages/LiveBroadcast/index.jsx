@@ -75,7 +75,7 @@ const LivePage = function () {
 
   const [ctrlSpeed, setCtrlSpeed] = useState(1);
 
-  const handleDiretion = (type) => {
+  const handleChangeDirection = (type) => {
     directionCtrlApi(type, ctrlSpeed);
   };
 
@@ -119,15 +119,15 @@ const LivePage = function () {
               <div className="button-col">
                 <button
                   className="icon icon-ctrl-left-up"
-                  onClick={() => handleDiretion(17)}
+                  onClick={() => handleChangeDirection(17)}
                 ></button>
                 <button
                   className="icon icon-ctrl-up"
-                  onClick={() => handleDiretion(13)}
+                  onClick={() => handleChangeDirection(13)}
                 ></button>
                 <button
                   className="icon icon-ctrl-right-up"
-                  onClick={() => handleDiretion(18)}
+                  onClick={() => handleChangeDirection(18)}
                 ></button>
                 <button className="icon icon-ctrl-less"></button>
                 <button className="last icon"></button>
@@ -136,12 +136,12 @@ const LivePage = function () {
               <div className="button-col">
                 <button
                   className="icon icon-ctrl-left"
-                  onClick={() => handleDiretion(15)}
+                  onClick={() => handleChangeDirection(15)}
                 ></button>
                 <span className="placeholder"></span>
                 <button
                   className="icon icon-ctrl-right"
-                  onClick={() => handleDiretion(16)}
+                  onClick={() => handleChangeDirection(16)}
                 ></button>
                 <button className="icon icon-ctrl-less"></button>
                 <button className="icon icon-ctrl-focus last"></button>
@@ -150,15 +150,15 @@ const LivePage = function () {
               <div className="button-col">
                 <button
                   className="icon icon-ctrl-down-left"
-                  onClick={() => handleDiretion(19)}
+                  onClick={() => handleChangeDirection(19)}
                 ></button>
                 <button
                   className="icon icon-ctrl-down"
-                  onClick={() => handleDiretion(14)}
+                  onClick={() => handleChangeDirection(14)}
                 ></button>
                 <button
                   className="icon icon-ctrl-down-right"
-                  onClick={() => handleDiretion(20)}
+                  onClick={() => handleChangeDirection(20)}
                 ></button>
                 <button className="icon icon-ctrl-less"></button>
                 <button className="icon icon-ctrl-focus last"></button>

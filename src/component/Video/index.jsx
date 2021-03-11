@@ -49,6 +49,7 @@ const Video = ({ active, url, onClick }) => {
       flvPlayer.play();
     }
     return () => {
+      flvPlayerRef.current.unload();
       flvPlayerRef.current.destroy();
     };
   }, [url]);
@@ -56,16 +57,18 @@ const Video = ({ active, url, onClick }) => {
   return (
     <div className={`video-box ${active ? 'active' : ''}`} onClick={onClick}>
       {url ? (
-        <video
-          className="video"
-          autoPlay={true}
-          muted={true}
-          ref={videoRef}
-        ></video>
+        <>
+          <Controls speeds={speeds} />
+          <video
+            className="video"
+            autoPlay={true}
+            muted={true}
+            ref={videoRef}
+          ></video>
+        </>
       ) : (
         <div className="no-video">暂无视频资源</div>
       )}
-      <Controls speeds={speeds} />
     </div>
   );
 };
