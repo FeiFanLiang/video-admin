@@ -30,6 +30,10 @@ const treeData = [
         title: '1.99',
         key: '0-0-0',
         icon: <i className="icon icon-camera-gun" />,
+        video: {
+          url:
+            'ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1',
+        },
       },
       {
         title: '朝阳',
@@ -40,6 +44,10 @@ const treeData = [
             title: '1.88',
             key: '0-0-0-0',
             icon: <i className="icon icon-camera-gun" />,
+            video: {
+              url:
+                'ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1',
+            },
           },
         ],
       },
@@ -51,6 +59,10 @@ const treeData = [
             title: '1.22',
             key: '0-0-0-1',
             icon: <i className="icon icon-camera-gun" />,
+            video: {
+              url:
+                'ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1',
+            },
           },
         ],
       },
@@ -69,10 +81,50 @@ const marks = {
 };
 
 const TreeRender = (props) => {
-  return <div className="tree-item">{props.title}</div>;
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData('application/json', JSON.stringify(props.video));
+  };
+
+  return (
+    <span
+      className="tree-item"
+      draggable={!!props.video}
+      onDragStart={handleDragStart}
+      onDoubleClick={(e) => props.onDoubleClick(props.video)}
+    >
+      {props.title}
+    </span>
+  );
 };
 
 const LivePage = function () {
+  const emptyVideo = {
+    url: '',
+  };
+  const [videoList, setVideoList] = useState(
+    Array.from(new Array(4)).map((el) => emptyVideo),
+  );
+  const handleVideoDrop = (index, newVideo) => {
+    setVideoList(
+      videoList.map((el, i) => {
+        if (i === index) {
+          return newVideo;
+        }
+        return el;
+      }),
+    );
+  };
+  const handleCloseVideo = (index) => {
+    setVideoList(
+      videoList.map((el, i) => {
+        if (i === index) {
+          return emptyVideo;
+        }
+        return el;
+      }),
+    );
+  };
+
   const [lightOpen, setLight] = useState(false);
   const handleLightCtrl = () => {
     setLight(!lightOpen);
@@ -132,6 +184,14 @@ const LivePage = function () {
                     defaultExpandAll
                     defaultSelectedKeys={['0-0-0']}
                     treeData={treeData}
+                    titleRender={(nodeData) => (
+                      <TreeRender
+                        {...nodeData}
+                        onDoubleClick={(video) =>
+                          handleVideoDrop(active ? active : 0, video)
+                        }
+                      />
+                    )}
                   />
                 </div>
               </Panel>
@@ -249,24 +309,32 @@ const LivePage = function () {
       <div className="right">
         <div className="window-wrap">
           <div className="normal-row">
-            <div className="video-window">
-              <Video />
-            </div>
-            <div className="video-window">
-              <Video
-                active={active === 1 ? true : false}
-                onClick={() => handlePickWindow(1)}
-                url="ws://47.94.90.247:559/test123/192.168.0.205:8000:admin:admin12345:0:33?live=1"
-              />
-            </div>
+            {videoList.slice(0, 2).map((video, index) => {
+              return (
+                <div className="video-window" key={index}>
+                  <Video
+                    active={active === index}
+                    url={video.url}
+                    onClick={() => handlePickWindow(index)}
+                    onDrop={(e) => handleVideoDrop(index, e)}
+                    onClose={() => handleCloseVideo(index)}
+                  />
+                </div>
+              );
+            })}
           </div>
           <div className="normal-row">
-            <div className="video-window">
-              <Video />
-            </div>
-            <div className="video-window">
-              <Video />
-            </div>
+            {videoList.slice(2, 4).map((video, index) => (
+              <div className="video-window" key={index + 2}>
+                <Video
+                  active={active === index + 2}
+                  url={video.url}
+                  onClick={() => handlePickWindow(index + 2)}
+                  onDrop={(e) => handleVideoDrop(index + 2, e)}
+                  onClose={() => handleCloseVideo(index + 2)}
+                />
+              </div>
+            ))}
           </div>
         </div>
 

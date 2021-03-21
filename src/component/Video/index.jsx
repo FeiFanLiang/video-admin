@@ -3,10 +3,17 @@ import './style.less';
 import flvjs from 'flv.js';
 import Controls from './component/Controls';
 
-const Video = ({ active, url, onClick }) => {
+const Video = ({ active, url, onClick, onDrop, onClose }) => {
   const videoRef = useRef(null);
   const flvPlayerRef = useRef(null);
   const [speeds, setSpeeds] = useState(0);
+
+  const handleDrop = (e) => {
+    const videoString = e.dataTransfer.getData('application/json');
+    if (videoString) {
+      onDrop(JSON.parse(videoString));
+    }
+  };
 
   useEffect(() => {
     if (flvjs.isSupported() && !flvPlayerRef.current && url) {
@@ -51,10 +58,16 @@ const Video = ({ active, url, onClick }) => {
   }, [url]);
 
   return (
-    <div className={`video-box ${active ? 'active' : ''}`} onClick={onClick}>
+    <div
+      className={`video-box ${active ? 'active' : ''}`}
+      onClick={onClick}
+      onDragEnter={(e) => e.preventDefault()}
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={(e) => handleDrop(e)}
+    >
       {url ? (
         <>
-          <Controls speeds={speeds} />
+          <Controls speeds={speeds} onClose={onClose} />
           <video
             className="video"
             autoPlay={true}

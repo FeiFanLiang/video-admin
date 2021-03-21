@@ -1,11 +1,14 @@
 import React from 'react';
 
-const Controls = ({ speeds }) => {
+const Controls = ({ speeds, onClose }) => {
   return (
     <div className="video-control-wrap">
       <div className="video-control">
         <div className="control-panel">
-          <button className="icon icon-video-close ctrl-btn"></button>
+          <button
+            className="icon icon-video-close ctrl-btn"
+            onClick={onClose}
+          ></button>
           <button className="icon icon-video-audio ctrl-btn"></button>
           <button className="icon icon-video-video ctrl-btn"></button>
           <button className="icon icon-video-stream ctrl-btn"></button>

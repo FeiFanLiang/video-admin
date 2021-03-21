@@ -11,7 +11,6 @@ export default defineConfig({
     { path: '/login', component: '@/pages/login' },
     {
       path: '/',
-      exact: false,
       component: '@/layout/index',
       wrappers: ['@/layout/components/Wrap'],
       routes: [
