@@ -55,6 +55,11 @@ const Video = ({ active, url, onClick, onDrop, onClose }) => {
       flvPlayer.load();
       flvPlayer.play();
     }
+    if (flvPlayerRef.current && !url) {
+      flvPlayerRef.current.unload();
+      flvPlayerRef.current.destroy();
+      flvPlayerRef.current = null;
+    }
   }, [url]);
 
   return (

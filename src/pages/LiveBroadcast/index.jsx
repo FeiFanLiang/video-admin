@@ -182,6 +182,7 @@ const LivePage = function () {
                 <div className="tree-box">
                   <DirectoryTree
                     defaultExpandAll
+                    blockNode
                     defaultSelectedKeys={['0-0-0']}
                     treeData={treeData}
                     titleRender={(nodeData) => (
