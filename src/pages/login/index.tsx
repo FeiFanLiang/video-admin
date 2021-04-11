@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './login.less';
 import { Form, Input, Button, message } from 'antd';
 import { UnlockOutlined, UserOutlined } from '@ant-design/icons';
-import { connect } from 'umi';
+import { connect, Dispatch, History, Loading } from 'umi';
 
-function LoginPage({ loading, dispatch, history }) {
-  const onFinish = (form) => {
+interface FormModel {
+  user: string;
+  pwd: string;
+}
+
+function LoginPage({
+  loading,
+  dispatch,
+  history,
+}: {
+  loading: boolean;
+  dispatch: Dispatch;
+  history: History;
+}) {
+  const onFinish = (form: FormModel) => {
     dispatch({
       type: 'global/login',
       payload: { form },
@@ -55,10 +68,10 @@ function LoginPage({ loading, dispatch, history }) {
   );
 }
 
-const mapStateToProps = ({ loading }) => {
+const mapStateToProps = ({ loading }: { loading: Loading }) => {
   return {
     loading: loading.effects['global/login'],
   };
 };
 
-export default connect(mapStateToProps)(LoginPage);
+export default connect(mapStateToProps)(LoginPage as FC);

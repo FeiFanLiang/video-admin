@@ -8,15 +8,15 @@ export default defineConfig({
     //dark: true,
   },
   routes: [
-    { path: '/login', component: '@/pages/login' },
+    { path: '/login', component: '@/pages/login/index' },
     {
       path: '/',
       component: '@/layout/index',
-      wrappers: ['@/layout/components/Wrap'],
+      wrappers: ['@/layout/components/Wrap/index'],
       routes: [
         {
           path: '/',
-          redirect: '/video/live',
+          redirect: '/video/live/index',
         },
         {
           path: '/video/live',

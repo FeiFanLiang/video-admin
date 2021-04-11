@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { NavLink } from 'umi';
 import { useRouteMatch } from 'react-router-dom';
 import './style.less';
 
-const routes = [
+interface parentRoute {
+  path: string;
+  title: string;
+  children: route[];
+}
+
+interface route {
+  path: string;
+  title: string;
+}
+
+const routes: parentRoute[] = [
   {
     path: '/video',
     title: '视频监控',
@@ -42,11 +53,11 @@ const routes = [
   },
 ];
 
-export default function (props) {
-  const [subRoutes, setSubRoutes] = useState([]);
+const HeadeNav: FC = (props) => {
+  const [subRoutes, setSubRoutes] = useState<route[]>([]);
   const [subLinkShow, setLinkShow] = useState(false);
 
-  const handleMoveRoute = (route) => {
+  const handleMoveRoute = (route: parentRoute) => {
     setLinkShow(true);
     setSubRoutes(route.children);
   };
@@ -89,4 +100,6 @@ export default function (props) {
       ) : null}
     </header>
   );
-}
+};
+
+export default HeadeNav;

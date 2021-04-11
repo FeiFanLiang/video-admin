@@ -1,14 +1,30 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  FC,
+  MutableRefObject,
+  DragEventHandler,
+  Ref,
+} from 'react';
 import './style.less';
 import flvjs from 'flv.js';
 import Controls from './component/Controls';
 
-const Video = ({ active, url, onClick, onDrop, onClose }) => {
-  const videoRef = useRef(null);
-  const flvPlayerRef = useRef(null);
+interface VideoProps {
+  active: boolean;
+  url: string;
+  onClick: () => void;
+  onDrop: (video: any) => void;
+  onClose: () => void;
+}
+
+const Video: FC<VideoProps> = ({ active, url, onClick, onDrop, onClose }) => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const flvPlayerRef = useRef<flvjs.Player | null>(null);
   const [speeds, setSpeeds] = useState(0);
 
-  const handleDrop = (e) => {
+  const handleDrop: DragEventHandler = (e) => {
     const videoString = e.dataTransfer.getData('application/json');
     if (videoString) {
       onDrop(JSON.parse(videoString));
@@ -25,11 +41,11 @@ const Video = ({ active, url, onClick, onDrop, onClose }) => {
         },
         {
           enableStashBuffer: false,
-          stashInitialSize: '10KB',
+          stashInitialSize: 10,
         },
       );
       flvPlayerRef.current = flvPlayer;
-      flvPlayer.attachMediaElement(videoRef.current);
+      flvPlayer.attachMediaElement(videoRef.current as HTMLVideoElement);
       flvPlayer.on(flvjs.Events.ERROR, (error) => {
         console.log('ERROR', error);
       });
@@ -47,16 +63,19 @@ const Video = ({ active, url, onClick, onDrop, onClose }) => {
         setSpeeds(Math.ceil(info.speed));
       });
 
-      videoRef.current.addEventListener('canplay', (info) => {
-        console.log('videoRef', info);
-        //videoRef.current.muted = false;
-      });
+      (videoRef.current as HTMLVideoElement).addEventListener(
+        'canplay',
+        (info) => {
+          console.log('videoRef', info);
+          //videoRef.current.muted = false;
+        },
+      );
 
       flvPlayer.load();
       flvPlayer.play();
     }
     if (flvPlayerRef.current && !url) {
-      flvPlayerRef.current.unload();
+      (flvPlayerRef.current as flvjs.Player).unload();
       flvPlayerRef.current.destroy();
       flvPlayerRef.current = null;
     }

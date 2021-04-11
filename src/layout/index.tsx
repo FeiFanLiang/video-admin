@@ -1,7 +1,7 @@
 import React from 'react';
-import HeaderNav from './components/HeadeNav';
+import HeaderNav from './components/HeadeNav/index';
 
-const Layout = (props) => {
+const Layout = (props: any) => {
   return (
     <section>
       <HeaderNav {...props} />

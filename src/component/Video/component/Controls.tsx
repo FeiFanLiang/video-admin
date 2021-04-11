@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const Controls = ({ speeds, onClose }) => {
+interface ControlsProps {
+  speeds?: number;
+  onClose: () => void;
+}
+
+const Controls: FC<ControlsProps> = ({ speeds, onClose }) => {
   return (
     <div className="video-control-wrap">
       <div className="video-control">

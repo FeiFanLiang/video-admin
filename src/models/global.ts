@@ -1,9 +1,25 @@
 import { loginApi } from '@/server/auth';
+import { ImmerReducer, Effect, Subscription } from 'umi';
 import { setToken, getToken } from '@/utils/cookie';
 
-export default {
+export interface globalStateType {
+  token: string;
+}
+
+export interface globalModelType {
+  state: globalStateType;
+  reducers: {
+    updateToken: ImmerReducer<globalStateType>;
+    clearToken: ImmerReducer<globalStateType>;
+  };
+  effects: {
+    login: Effect;
+  };
+}
+
+const globalModel: globalModelType = {
   state: {
-    token: '' || getToken(),
+    token: getToken() || '',
   },
   reducers: {
     updateToken(state, { payload }) {
@@ -28,3 +44,5 @@ export default {
     },
   },
 };
+
+export default globalModel;

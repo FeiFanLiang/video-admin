@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, FC, MouseEventHandler } from 'react';
 import './style.less';
-import { Collapse, Tree, Slider, Input } from 'antd';
+import { Collapse, Tree, Slider, Input, TreeNodeProps } from 'antd';
 import {
   SearchOutlined,
   CaretUpOutlined,
@@ -9,9 +9,23 @@ import {
 } from '@ant-design/icons';
 import Video from '@/component/Video';
 import { directionCtrlApi, powerSwitchApi } from '@/server/cmd';
+
 const { Panel } = Collapse;
 const { DirectoryTree } = Tree;
-const PanelHeader = ({ title }) => {
+
+interface video {
+  url: string;
+}
+
+interface DataNode {
+  title: string;
+  key: string;
+  icon?: React.ReactNode;
+  video?: video;
+  children?: DataNode[];
+}
+
+const PanelHeader = ({ title }: { title: string }) => {
   return (
     <div className="panel-header">
       <i></i>
@@ -20,7 +34,7 @@ const PanelHeader = ({ title }) => {
   );
 };
 
-const treeData = [
+const treeData: DataNode[] = [
   {
     title: '北京',
     key: '0-0',
@@ -53,6 +67,7 @@ const treeData = [
       },
       {
         title: '海淀',
+        key: '0-1',
         icon: <i className="icon icon-tree-map" />,
         children: [
           {
@@ -80,8 +95,8 @@ const marks = {
   7: '7',
 };
 
-const TreeRender = (props) => {
-  const handleDragStart = (e) => {
+const TreeRender = (props: any) => {
+  const handleDragStart = (e: React.DragEvent) => {
     e.dataTransfer.setData('application/json', JSON.stringify(props.video));
   };
 
@@ -98,13 +113,13 @@ const TreeRender = (props) => {
 };
 
 const LivePage = function () {
-  const emptyVideo = {
+  const emptyVideo: video = {
     url: '',
   };
   const [videoList, setVideoList] = useState(
     Array.from(new Array(4)).map((el) => emptyVideo),
   );
-  const handleVideoDrop = (index, newVideo) => {
+  const handleVideoDrop = (index: number, newVideo: video) => {
     setVideoList(
       videoList.map((el, i) => {
         if (i === index) {
@@ -114,7 +129,7 @@ const LivePage = function () {
       }),
     );
   };
-  const handleCloseVideo = (index) => {
+  const handleCloseVideo = (index: number) => {
     setVideoList(
       videoList.map((el, i) => {
         if (i === index) {
@@ -139,12 +154,12 @@ const LivePage = function () {
 
   const [ctrlSpeed, setCtrlSpeed] = useState(1);
 
-  const handleChangeDirection = (type) => {
+  const handleChangeDirection = (type: number) => {
     directionCtrlApi(type, ctrlSpeed);
   };
 
-  const [active, setActive] = useState(null);
-  const handlePickWindow = (number) => {
+  const [active, setActive] = useState<number | null>(null);
+  const handlePickWindow = (number: number) => {
     setActive(number);
   };
 
@@ -188,7 +203,7 @@ const LivePage = function () {
                     titleRender={(nodeData) => (
                       <TreeRender
                         {...nodeData}
-                        onDoubleClick={(video) =>
+                        onDoubleClick={(video: video) =>
                           handleVideoDrop(active ? active : 0, video)
                         }
                       />
@@ -283,7 +298,7 @@ const LivePage = function () {
                   min={1}
                   max={7}
                   tooltipVisible={false}
-                  onChange={(speed) => setCtrlSpeed(speed)}
+                  onChange={(speed: number) => setCtrlSpeed(speed)}
                 />
               </div>
             </div>

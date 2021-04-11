@@ -1,5 +1,5 @@
 import { extend } from 'umi-request';
-import { getToken } from './cookie';
+import { getToken } from './cookie.ts';
 import { message } from 'antd';
 
 const request = extend({
@@ -8,9 +8,11 @@ const request = extend({
     Auth: getToken(),
   },
   prefix: '/api',
+  errorHandler: (error) => {
+    message.error(error.message || '网络错误');
+    throw new Error(error.message);
+  },
 });
-
-//request.interceptors.request.use((url,option) => {})
 
 request.interceptors.response.use(async (response, options) => {
   try {
